@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shoes/src/models/shoe_model.dart';
 import 'package:shoes/src/screens/shoe_screen.dart';
 
 class ShoePreview extends StatelessWidget {
@@ -89,29 +91,37 @@ class _ShoeSize extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: 15),
-      child: Text(
-        '${size.toString().replaceAll('.0', '')}',
-        style: TextStyle(
-          color: (this.size == 9) ? Colors.white : Color(0xffF1A23A),
-          fontSize: 16,
-          fontWeight: FontWeight.bold
-        )
-      ),
-      width: 45,
-      decoration: BoxDecoration(
-        color: (this.size == 9) ? Color(0xffF1A23A) : Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          if (this.size == 9)
-            BoxShadow(
-              color: Color(0xffF1A23A),
-              blurRadius: 10,
-              offset: Offset(0, 3)
-            )
-        ]
+
+    final shoeModel = Provider.of<ShoeModel>(context);
+
+    return GestureDetector(
+      onTap: () {
+        shoeModel.size = this.size;
+      },
+      child: Container(
+        alignment: Alignment.center,
+        margin: EdgeInsets.symmetric(vertical: 15),
+        child: Text(
+          '${size.toString().replaceAll('.0', '')}',
+          style: TextStyle(
+            color: (this.size == shoeModel.size) ? Colors.white : Color(0xffF1A23A),
+            fontSize: 16,
+            fontWeight: FontWeight.bold
+          )
+        ),
+        width: 45,
+        decoration: BoxDecoration(
+          color: (this.size == shoeModel.size) ? Color(0xffF1A23A) : Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            if (this.size == shoeModel.size)
+              BoxShadow(
+                color: Color(0xffF1A23A),
+                blurRadius: 10,
+                offset: Offset(0, 3)
+              )
+          ]
+        ),
       ),
     );
   }
