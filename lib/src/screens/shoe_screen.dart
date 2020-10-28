@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shoes/src/helpers/helpers.dart';
 import 'package:shoes/src/models/shoe_model.dart';
 import 'package:shoes/src/widgets/custom_widgets.dart';
 
@@ -8,6 +9,9 @@ class ShoeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    changeStatusLight();
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -24,6 +28,7 @@ class ShoeScreen extends StatelessWidget {
                   child: FloatingActionButton(
                     child: Icon(Icons.chevron_left, color: Colors.white, size: 60),
                     onPressed: () {
+                      changeStatusDark();
                       Navigator.pop(context);
                     },
                     backgroundColor: Colors.transparent,

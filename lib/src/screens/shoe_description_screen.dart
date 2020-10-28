@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/src/helpers/helpers.dart';
 import 'package:shoes/src/widgets/custom_widgets.dart';
 
 class ShoeDescriptionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    changeStatusDark();
+    
     return Scaffold(
       body: SafeArea(
         child: Column(
