@@ -1,5 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shoes/src/models/shoe_model.dart';
 import 'package:shoes/src/widgets/custom_widgets.dart';
 
 class ShoeScreen extends StatelessWidget {
@@ -96,10 +98,35 @@ class _ColorOptions extends StatelessWidget {
           Expanded(
             child: Stack(
               children: <Widget>[
-                Positioned(left: 60, child: _ColorOption(Color(0xffC6D642), 4)),
-                Positioned(left: 40, child: _ColorOption(Color(0xffFFAD29), 3)),
-                Positioned(left: 20, child: _ColorOption(Color(0xff2099F1), 2)),
-                _ColorOption(Color(0xff364D56), 1)
+                Positioned(
+                  left: 60, 
+                  child: _ColorOption(
+                    Color(0xffC6D642),
+                    4,
+                    'assets/imgs/green.png'
+                  )
+                ),
+                Positioned(
+                  left: 40, 
+                  child: _ColorOption(
+                    Color(0xffFFAD29),
+                    3,
+                    'assets/imgs/yellow.png'
+                  )
+                ),
+                Positioned(
+                  left: 20,
+                  child: _ColorOption(
+                    Color(0xff2099F1),
+                    2,
+                    'assets/imgs/blue.png'
+                  )
+                ),
+                _ColorOption(
+                  Color(0xff364D56),
+                  1,
+                  'assets/imgs/black.png'
+                )
               ],
             ),
           ),
@@ -119,20 +146,27 @@ class _ColorOption extends StatelessWidget {
 
   final Color color;
   final int index;
+  final String assetImage;
 
-  _ColorOption(this.color, this.index);
+  _ColorOption(this.color, this.index, this.assetImage);
 
   @override
   Widget build(BuildContext context) {
     return FadeInLeft(
       delay: Duration(milliseconds: this.index * 100),
       duration: Duration(milliseconds: 300),
-      child: Container(
-        width: 30,
-        height: 30,
-        decoration: BoxDecoration(
-          color: this.color,
-          shape: BoxShape.circle
+      child: GestureDetector(
+        onTap: () {
+          final shoeModel = Provider.of<ShoeModel>(context, listen: false);
+          shoeModel.assetImage = this.assetImage;
+        },
+        child: Container(
+          width: 30,
+          height: 30,
+          decoration: BoxDecoration(
+            color: this.color,
+            shape: BoxShape.circle
+          ),
         ),
       ),
     );

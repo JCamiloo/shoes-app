@@ -131,6 +131,9 @@ class _ShadowShoe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final shoeModel = Provider.of<ShoeModel>(context);
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 30),
       child: Stack(
@@ -140,7 +143,7 @@ class _ShadowShoe extends StatelessWidget {
             right: 0,
             child: _Shadow()
           ),
-          Image(image: AssetImage('assets/imgs/blue.png'))
+          Image(image: AssetImage(shoeModel.assetImage))
         ],
       ),
     );
